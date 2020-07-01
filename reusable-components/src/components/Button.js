@@ -26,7 +26,7 @@ const DesignBtn = styled.button`
     }
 `;
 
-function Button({children, color, textColor, size, startIcon, endIcon, disabled, variant, disableShadow, text}) {
+function Button({children, color, textColor, size, startIcon, endIcon, disabled, variant, disableShadow, text, ...props}) {
     const chooseColor = (color)=>{
         if(color === 'default') return '#E0E0E0';
         else if(color === 'primary') return '#2962FF';
@@ -47,6 +47,7 @@ function Button({children, color, textColor, size, startIcon, endIcon, disabled,
                 padding: size === 'sm' ? '6px 12px' : (size === 'lg' ? '11px 22px' : '8px 16px' ),
             }} 
             disabled={disabled}
+            {...props}
         >
             {startIcon ? <Icon style={{marginRight: '8px', fontSize: '18px'}}>{startIcon}</Icon> : null} 
             {text ? text : 'Default' } 
