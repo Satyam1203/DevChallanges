@@ -1,0 +1,10 @@
+.App {
+  text-align: left;
+  overflow-x: hidden;
+  background: rgb(96, 102, 208, 0.9);
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
