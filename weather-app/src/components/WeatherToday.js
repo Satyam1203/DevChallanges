@@ -25,6 +25,13 @@ const H1 = styled.h1`
     color: #a09fb1;
     font-size: 48px;
   }
+  @media (min-width: 1024px) {
+    width: 130%;
+    margin-left: -15%;
+  }
+  @media (max-width: 1024px) {
+    font-size: 120px;
+  }
 `;
 
 const WeatherState = styled.p`

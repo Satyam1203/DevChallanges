@@ -23,7 +23,12 @@ function Main() {
   const getWeather = (locId) => {
     setLoading(true);
     fetch(
-      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${locId}`
+      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${locId}`,
+      {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {
@@ -35,7 +40,12 @@ function Main() {
 
   const getLocId = (loc) => {
     fetch(
-      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${loc}`
+      `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${loc}`,
+      {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {

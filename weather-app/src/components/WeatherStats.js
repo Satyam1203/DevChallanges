@@ -25,7 +25,7 @@ const StatsWrapper = styled.div`
 const WeatherHighlights = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   @media (max-width: 1024px) {
     justify-content: center;
   }
