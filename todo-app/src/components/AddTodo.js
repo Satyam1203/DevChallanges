@@ -51,7 +51,7 @@ function AddTodo({ add, allTodos }) {
         onClick={() => {
           if (todo) {
             const newTodo = {
-              key: allTodos.length + 1,
+              key: Math.ceil(Math.random() * 1000000),
               title: todo,
               done: false,
             };

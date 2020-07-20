@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "@material-ui/core/Icon";
 
 import AddTodo from "./AddTodo";
@@ -6,25 +6,18 @@ import Task from "./Task";
 import { Title, Menu, DeleteBtn, ActiveIndicator } from "./styles";
 
 function TodoApp() {
+  const todos1 = JSON.parse(localStorage.getItem("todos")) || [];
+  const todos = Object.values(todos1);
+
+  const [change, setChange] = useState(false);
   const [show, setShow] = useState("All");
   const [indicatorPosition, setIndicatorPosition] = useState("16.5%");
-  const [allTodos, setAllTodos] = useState([
-    {
-      key: 1,
-      title: "Do Coding Challanges",
-      done: false,
-    },
-    {
-      key: 2,
-      title: "Complete the Frontend track",
-      done: false,
-    },
-    {
-      key: 3,
-      title: "Build a To-Do app with ReactJs",
-      done: true,
-    },
-  ]);
+  const [allTodos, setAllTodos] = useState(todos);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(allTodos));
+    setChange((t) => !t);
+  }, [allTodos]);
 
   return (
     <>
@@ -56,29 +49,26 @@ function TodoApp() {
         </div>
         <ActiveIndicator style={{ left: indicatorPosition }} />
       </Menu>
-      <AddTodo add={setAllTodos} allTodos={allTodos} />
+      <AddTodo add={setAllTodos} allTodos={todos} />
 
       <div style={{ textAlign: "right" }}>
-        {allTodos.map((todo) => {
-          {
-            if (show === "Active" && todo.done) return null;
-            else if (show === "Completed" && !todo.done) return null;
-          }
+        {todos.map((todo) => {
+          if (show === "Active" && todo.done) return null;
+          else if (show === "Completed" && !todo.done) return null;
           return (
             <Task
               key={todo.key}
               todo={todo}
-              allTodos={allTodos}
+              allTodos={todos}
               updateState={setAllTodos}
               show={show}
             />
           );
         })}
-        {show === "Completed" &&
-        allTodos.filter((t) => t.done === true).length ? (
+        {show === "Completed" && todos.filter((t) => t.done === true).length ? (
           <DeleteBtn
             onClick={() =>
-              setAllTodos(() => allTodos.filter((todo) => todo.done === false))
+              setAllTodos(() => todos.filter((todo) => todo.done === false))
             }
           >
             <Icon style={{ fontSize: "12px", margin: "0 5px" }}>
